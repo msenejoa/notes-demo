@@ -1,19 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './App.css'
-import Content from './components/Content'
+import EntryContent from './components/EntryContent'
+import TextArea from './components/TextArea'
 
-function App() {
-  return (
-    <div className='App'>
-      <div className='wrapper'>
-        <header className='page-header'>header</header>
-        <main className='page-main'>
-          <Content />
-        </main>
-        <footer className='page-footer'>footer</footer>
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      htmlState: {},
+    }
+  }
+
+  handleChange(value) {
+    this.setState({ htmlState: { ...value } })
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <div className='wrapper'>
+          <header className='page-header' />
+          <main className='page-main'>
+            <div className='left'>
+              {/*
+            <Content />
+          */}
+              <TextArea htmlState={v => this.handleChange(v)} />
+            </div>
+
+            <div className='right'>
+              <EntryContent htmlState={this.state.htmlState} />
+            </div>
+          </main>
+          <footer className='page-footer' />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default App
